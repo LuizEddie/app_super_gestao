@@ -18,15 +18,20 @@ use Illuminate\Support\Facades\Route;
     get, post, put, delete, patch
 */
 
-Route::get('/', function () {
-    return 'Olá, seja bem-vindo ao curso';
-});
+// Route::get('/', function () {
+//     return 'Olá, seja bem-vindo ao curso';
+// });
 
-Route::get('/sobre-nos', function () {
-    return 'Sobre nós';
-});
+Route::get("/", 'PrincipalController@principal');
 
-Route::get('/contato', function () {
-    return 'Contato';
-});
+Route::get("/contato", "ContatoController@contato");
+
+Route::get("/sobre-nos", "SobreNosController@sobreNos");
+// Route::get('/sobre-nos', function () {
+//     return 'Sobre nós';
+// });
+
+// Route::get('/contato', function () {
+//     return 'Contato';
+// });
 
