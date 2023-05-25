@@ -28,13 +28,11 @@ Route::get("/contato", "ContatoController@contato");
 
 Route::get("/sobre-nos", "SobreNosController@sobreNos");
 
-Route::get("/contato/{nome?}/{categoria?}/{assunto?}/{mensagem?}", function(string $nome = "Sem nome", string $categoria = "Sem categoria", string $assunto = "Sem assunto", string $mensagem = "Sem mensagem"){
+Route::get("/contato/{nome}/{categoria_id}", function(string $nome = "Sem nome", int $categoria_id = 1){
     echo "Nome: ".$nome."<br>";
-    echo "Categoria: ".$categoria."<br>";
-    echo "Assunto: ".$assunto."<br>";
-    echo "Mensagem: ".$mensagem."<br>";
+    echo "Categoria: ".$categoria_id."<br>";
+})->where('categoria_id', '[0-9]+')->where('nome', '[a-zA-Z]+');
 
-});
 // Route::get('/sobre-nos', function () {
 //     return 'Sobre nós';
 // });
