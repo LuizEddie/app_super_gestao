@@ -27,6 +27,14 @@ Route::get("/", 'PrincipalController@principal');
 Route::get("/contato", "ContatoController@contato");
 
 Route::get("/sobre-nos", "SobreNosController@sobreNos");
+
+Route::get("/contato/{nome?}/{categoria?}/{assunto?}/{mensagem?}", function(string $nome = "Sem nome", string $categoria = "Sem categoria", string $assunto = "Sem assunto", string $mensagem = "Sem mensagem"){
+    echo "Nome: ".$nome."<br>";
+    echo "Categoria: ".$categoria."<br>";
+    echo "Assunto: ".$assunto."<br>";
+    echo "Mensagem: ".$mensagem."<br>";
+
+});
 // Route::get('/sobre-nos', function () {
 //     return 'Sobre nós';
 // });
