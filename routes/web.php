@@ -44,6 +44,19 @@ Route::prefix('/app')->group(function(){
     })->name('app.produtos');
 });
 
+Route::get("/rota1", function(){
+    echo 'Rota1';
+})->name('site.rota1');
+
+Route::get("/rota2", function(){
+    return redirect('/rota1');
+})->name('site.rota2');
+
+Route::fallback(function(){
+    echo 'Rota inexistente,
+     <a href="'.route('site.index').'">Clique aqui</a> para ir para a página principal';
+});
+// Route::redirect('/rota2', '/rota1');
 
 // Route::get("/contato/{nome}/{categoria_id}", function(string $nome = "Sem nome", int $categoria_id = 1){
 //     echo "Nome: ".$nome."<br>";
