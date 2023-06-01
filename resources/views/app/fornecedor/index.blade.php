@@ -1,10 +1,23 @@
 <h3>Fornecedor</h3>
-<?= 'Teste' ?>
-{{'Teste'}}
-{{-- Fica o comentario que será descartado pelo interpretador do blade --}}
 
 @php
- //Comentario feito usando a sintaxe nativa do php
- echo 'salve'
 
-@endphp
+    /*if(){
+
+    }else if(){
+
+    }else{
+        
+    }*/
+
+@endphp 
+
+{{-- @dd($fornecedores) --}}
+
+@if(count($fornecedores) > 0 && count($fornecedores) < 10)
+    <h3>Existem alguns fornecedores cadastrados!</h3>
+@elseif(count($fornecedores) > 10)
+    <h3>Existem varios fornecedores cadastrados!</h3>
+@else
+    <h3>Ainda não há fornecedores cadastrados!</h3>
+@endif
