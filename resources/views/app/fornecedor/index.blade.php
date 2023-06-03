@@ -10,10 +10,10 @@
 
 @isset($fornecedores)
     @forelse($fornecedores as $f)
-        Fornecedor: {{ $f['nome']}}<br>
-        Status: {{ $f['status']}}<br>
-        CNPJ: {{ $f['cnpj'] ?? 'Dado não preenchido'}}<br>
-        Telefone: {{ $f['ddd'] ?? ''}} {{ $f['telefone'] ?? ''}}<br>
+        Fornecedor: @{{ $f['nome']}}<br>
+        Status: @{{ $f['status']}}<br>
+        CNPJ: @{{ $f['cnpj'] ?? 'Dado não preenchido'}}<br>
+        Telefone: @{{ $f['ddd'] ?? ''}} @{{ $f['telefone'] ?? ''}}<br>
         @switch($f['ddd'])
             @case('11')
                 São Paulo - SP
