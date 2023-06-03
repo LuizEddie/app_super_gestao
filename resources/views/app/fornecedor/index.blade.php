@@ -9,7 +9,7 @@
 @endphp 
 
 @isset($fornecedores)
-    @foreach($fornecedores as $f)
+    @forelse($fornecedores as $f)
         Fornecedor: {{ $f['nome']}}<br>
         Status: {{ $f['status']}}<br>
         CNPJ: {{ $f['cnpj'] ?? 'Dado não preenchido'}}<br>
@@ -28,5 +28,7 @@
                 Estado não identificado
         @endswitch
         <hr>
-    @endforeach
+    @empty
+        Não existem fornecedores cadastrados
+    @endforelse
 @endisset
