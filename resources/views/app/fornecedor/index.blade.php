@@ -12,5 +12,5 @@
     Fornecedor: {{ $fornecedores[1]['nome']}}<br>
     Status: {{ $fornecedores[1]['status']}}<br>
     CNPJ: {{ $fornecedores[1]['cnpj'] ?? 'Dado não preenchido'}}<br>
-
+    <!-- $variavel testada não estiver definida(isset) ou $variavel testada possuir o valor null -->
 @endisset
