@@ -28,10 +28,26 @@ class ContatoController extends Controller
 
         // $contato->save();
 
-        $contato = new SiteContato();
-        $contato->create($request->all());
+        // $contato = new SiteContato();
+        // $contato->create($request->all());
 
         $titulo = 'Contato';
-        return view('site.contato', compact('titulo'));
+        $motivo_contato = [
+            '1' => 'Dúvida',
+            '2' => 'Elogio',
+            '3' => 'Reclamação',
+        ];
+        return view('site.contato', ['titulo' => $titulo, 'motivo_contato'=>$motivo_contato]);
+    }
+
+    public function salvar(Request $request){
+        $request->validate([
+            "nome" => 'required|min:3|max:40',
+            "email" => 'required',
+            "telefone" => "required",
+            "motivo_contato" => "required",
+            "mensagem" => "required|max:2000"
+        ]);
+        SiteContato::create($request->all());
     }
 }
