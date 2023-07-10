@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class SobreNosController extends Controller
 {
-
     public function sobreNos(){
         $titulo = 'Sobre Nós';
 

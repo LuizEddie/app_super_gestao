@@ -18,7 +18,7 @@ class LogAcessoMiddleware
     public function handle($request, Closure $next)
     {
         LogAcesso::create(['log'=> 'IP '.$request->server->get('REMOTE_ADDR').' requisitou a rota '.$request->getRequestUri()]);
-        // return $next($request);
-        return Response("Chegamos no middleware");
+        return $next($request);
+        // return Response("Chegamos no middleware");
     }
 }
