@@ -4,7 +4,7 @@
     <div class="conteudo-pagina">
 
         <div class="titulo-pagina-2">
-            <p>Produtos - Adicionar</p>
+            <p>Produtos - Atualizar</p>
         </div>
 
         <div class="menu">
@@ -17,20 +17,20 @@
         <div class="informacao-pagina">
             {{-- {{ $msg }} --}}
             <div style="width: 30%; margin-left: auto; margin-right: auto">
-                <form method="post" action="{{ route('produto.store')}}">
-                    {{-- <input type="hidden" name="id" value="{{$fornecedor->id ?? ""}}"> --}}
+                <form method="post" action="">
+                    <input type="hidden" name="id" value="{{$produto->id ?? ""}}">
                     @csrf
-                    <input type="text" name="nome" class="borda-preta" placeholder="Nome" value="{{ old("nome")}}">
+                    <input type="text" name="nome" class="borda-preta" placeholder="Nome" value="{{ $produto->nome ?? old("nome")}}">
                     {{ $errors->has("nome") ? $errors->first('nome') : ''}}
-                    <input type="text" name="descricao" class="borda-preta" placeholder="Descrição"  value="{{ old("descricao")}}">
+                    <input type="text" name="descricao" class="borda-preta" placeholder="Descrição"  value="{{ $produto->descricao ?? old("descricao")}}">
                     {{ $errors->has('descricao') ? $errors->first('descricao') : ''}}
-                    <input type="text" name="peso" class="borda-preta" placeholder="Peso"  value="{{ old("peso")}}">
+                    <input type="text" name="peso" class="borda-preta" placeholder="Peso"  value="{{ $produto->peso ?? old("peso")}}">
                     {{ $errors->has("peso") ? $errors->first('peso') : ''}}
                     <select name="unidade_id">
                         <option>Selecione a unidade de medida</option>
                         
                         @foreach($unidades as $unidade)
-                            <option value="{{ $unidade->id }}" {{ old("unidade_id") == $unidade->id ? "selected" : ""}}>{{ $unidade->descricao }}</option>
+                            <option value="{{ $unidade->id }}" {{ ($produto->unidade_id ?? old("unidade_id")) == $unidade->id ? "selected" : ""}}>{{ $unidade->descricao }}</option>
                         @endforeach
                     </select>
                     {{ $errors->has("unidade_id") ? $errors->first('unidade_id') : ''}}
