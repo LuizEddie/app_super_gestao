@@ -85,6 +85,7 @@ class ProdutoController extends Controller
     {
         $unidades = Unidade::all();
         return view('app.produto.edit', ['titulo'=>'Produtos', 'produto'=>$produto, 'unidades'=> $unidades]);
+        // return view('app.produto.create', ['titulo'=>'Produtos', 'produto'=>$produto, 'unidades'=> $unidades]);
     }
 
     /**
@@ -96,7 +97,8 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $produto->update($request->all());
+        return redirect()->route('produto.show', ['titulo'=> 'Produtos', 'produto'=>$produto->id]);
     }
 
     /**
@@ -107,6 +109,8 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+
+        return redirect()->route('produto.index', ['titulo'=> 'Produtos']);
     }
 }

@@ -17,25 +17,8 @@
         <div class="informacao-pagina">
             {{-- {{ $msg }} --}}
             <div style="width: 30%; margin-left: auto; margin-right: auto">
-                <form method="post" action="{{ route('produto.store')}}">
-                    {{-- <input type="hidden" name="id" value="{{$fornecedor->id ?? ""}}"> --}}
-                    @csrf
-                    <input type="text" name="nome" class="borda-preta" placeholder="Nome" value="{{ old("nome")}}">
-                    {{ $errors->has("nome") ? $errors->first('nome') : ''}}
-                    <input type="text" name="descricao" class="borda-preta" placeholder="Descrição"  value="{{ old("descricao")}}">
-                    {{ $errors->has('descricao') ? $errors->first('descricao') : ''}}
-                    <input type="text" name="peso" class="borda-preta" placeholder="Peso"  value="{{ old("peso")}}">
-                    {{ $errors->has("peso") ? $errors->first('peso') : ''}}
-                    <select name="unidade_id">
-                        <option>Selecione a unidade de medida</option>
-                        
-                        @foreach($unidades as $unidade)
-                            <option value="{{ $unidade->id }}" {{ old("unidade_id") == $unidade->id ? "selected" : ""}}>{{ $unidade->descricao }}</option>
-                        @endforeach
-                    </select>
-                    {{ $errors->has("unidade_id") ? $errors->first('unidade_id') : ''}}
-                    <button type="submit" class="borda-preta">Cadastrar</button>
-                </form>
+                @component('app.produto._components.form_create_edit', ['unidades'=>$unidades])
+                @endcomponent
             </div>
         </div>
     </div>
