@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ProdutoDetalhe;
+use App\ItemDetalhe;
 use App\Unidade;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,7 @@ class ProdutoDetalheController extends Controller
      */
     public function store(Request $request)
     {
-        ProdutoDetalhe::create($request->all());
+        ItemDetalhe::create($request->all());
         echo 'Cadastro realizado com sucesso!';
     }
 
@@ -55,11 +56,12 @@ class ProdutoDetalheController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  App\ProdutoDetalhe $produtoDetalhe
+     * @param  App\ItemDetalhe $produtoDetalhe
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProdutoDetalhe $produtoDetalhe)
+    public function edit(ItemDetalhe $produtoDetalhe)
     {   
+        $produtoDetalhe = ItemDetalhe::with('item')->find($produtoDetalhe->id);
         $unidades = Unidade::all();
         return view("app.produto_detalhe.edit", ['titulo'=> 'Detalhes', 'produto_detalhe'=>$produtoDetalhe, 'unidades' => $unidades]);
     }
@@ -68,10 +70,10 @@ class ProdutoDetalheController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\ProdutoDetalhe $produtoDetalhe
+     * @param  App\ItemDetalhe $produtoDetalhe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProdutoDetalhe $produtoDetalhe)
+    public function update(Request $request, ItemDetalhe $produtoDetalhe)
     {
         $produtoDetalhe->update($request->all());
         echo 'Atualização realizada com sucesso!';

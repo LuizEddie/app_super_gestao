@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\Item;
 use App\ProdutoDetalhe;
 use App\Unidade;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         //
-        $produtos = Produto::paginate(10);
+        $produtos = Item::with(['itemDetalhe', 'fornecedor'])->paginate(10);
         
         // foreach($produtos as $key => $produto){
         //     // print_r($produto->getAttributes());
@@ -77,7 +78,7 @@ class ProdutoController extends Controller
 
         $request->validate($regras, $feedbacks);
 
-        Produto::create($request->all());
+        Item::create($request->all());
 
         return redirect()->route('produto.index', ['titulo'=>'Produtos']);
     }
@@ -85,10 +86,10 @@ class ProdutoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Produto  $produto
+     * @param  \App\Item  $produto
      * @return \Illuminate\Http\Response
      */
-    public function show(Produto $produto)
+    public function show(Item $produto)
     {
         return view('app.produto.show', ['titulo'=>'Produtos', 'produto'=> $produto]);
     }
@@ -96,10 +97,10 @@ class ProdutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Produto  $produto
+     * @param  \App\Item  $produto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produto $produto)
+    public function edit(Item $produto)
     {
         $unidades = Unidade::all();
         return view('app.produto.edit', ['titulo'=>'Produtos', 'produto'=>$produto, 'unidades'=> $unidades]);
@@ -110,10 +111,10 @@ class ProdutoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Produto  $produto
+     * @param  \App\Item  $produto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produto $produto)
+    public function update(Request $request, Item $produto)
     {
         $produto->update($request->all());
         return redirect()->route('produto.show', ['titulo'=> 'Produtos', 'produto'=>$produto->id]);
@@ -122,10 +123,10 @@ class ProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Produto  $produto
+     * @param  \App\Item  $produto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produto $produto)
+    public function destroy(Item $produto)
     {
         $produto->delete();
 
