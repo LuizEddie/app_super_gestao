@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use App\Pedido;
+use App\PedidoProduto;
 use Illuminate\Http\Request;
 
 class PedidoProdutoController extends Controller
@@ -37,14 +38,25 @@ class PedidoProdutoController extends Controller
      */
     public function store(Request $request, Pedido $pedido)
     {
-        echo '<pre>';
-        print_r($pedido);
-        echo '</pre>';
-        echo '<hr>';
-        echo '<pre>';
-        print_r($request->all());
-        echo '</pre>';
+        $regras = [
+            'produto_id' => 'exists:produtos,id'
+        ];
 
+        $feedback = [
+            "produto_id.exists"=> 'O produto informado não existe'
+        ];
+
+        $request->validate($regras, $feedback);
+        // echo $pedido->id." - ".$request->get('produto_id');
+
+        $pedidoProduto = new PedidoProduto;
+
+        $pedidoProduto->pedido_id = $pedido->id;
+        $pedidoProduto->produto_id = $request->get("produto_id");
+
+        $pedidoProduto->save();
+
+        return redirect()->route('pedido-produto.create', ['pedido'=>$pedido->id]);
     }
 
     /**
