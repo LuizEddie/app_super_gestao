@@ -22,5 +22,7 @@ class Item extends Model
 
         // 3 - Representa o nome da fk da tabela mapeada pelo model na tabela de relacionamento
         // 4 - Representa o nome da fk da tabela mapeada pelo model utilizado no relacionamento que estamos implementando
+        // 3 - 'key ref. model classe atual', 
+        // 4 - 'key ref. outro model classe relação'
     }
 }
